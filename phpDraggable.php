@@ -1,7 +1,24 @@
-<?<?php 
+<?php 
 
 	if(isset($_POST['btn_enviar'])){
-		echo 'botao enviar';
+		/*
+		for($i=0;$i<count( $_FILES['arquivos']['name'] );$i++ ){
+			echo "
+
+				<img src='". $_FILES['arquivos']['tmp_name'][$i] ."' id='". $i ."'>
+			";
+			$tmp = $_FILES['arquivos']['tmp_name'][$i];
+			echo "tmp: " . $tmp."<br>";
+			$images = $_FILES['arquivos']['name'][$i];	
+			echo $images."<br>";
+		}
+		*/
+		$file = $_FILES['arquivos']['tmp_name'][0];
+		echo $file."<br>";
+		$src = imagecreatefromjpeg($file);
+		echo $src;
+		
+
 	}
 
 
@@ -35,19 +52,58 @@
 		
 	</ul>
 
+
 	<div id="dropLocation" ondragover="over(event)" ondrop="drop(event)"></div>
-	<div class="meuForm">
+	<div>
 		<form method="POST" action="phpDraggable.php" enctype="multipart/form-data" >
 		
-		<input type="file" name="arquivos[]" multiple>
-		<button name="btn_enviar" type="submit">
-			Enviar
-		</button>
-
+			<input type="file" name="arquivos[]" id='arquivosImg' multiple >
+			<button name="btn_enviar" type="submit">
+				Enviar
+			</button>
+			<div id="listFiles"></div>
+			
+	</div>
+		
 		</form>
 	</div>
 
 		<script type="text/javascript">
+			
+			
+
+
+			//check FILE API support
+
+			if(window.File && window.FileReader && window.FileList && window.Blob){
+
+				//alert('ok');
+			}else{
+				alert('The files APIs are not fully supported in this browser ')
+			}
+
+
+			var handleFileSelect = (evt) => {
+				var output = [];
+				files = event.target.files;
+				for(var i=0, f;f  = files[i];i++){
+					output.push( '<li><strong>'+ escape(f.name) +'</strong> </li>' )
+
+				}
+				
+				document.getElementById('listFiles')
+				listFiles.innerHTML = "<ul>" + output + "</ul>";
+			}
+
+			
+			var listarImg = () =>{
+				var x =document.getElementById("arquivosImg");
+				var newX = document.getElementById(x);
+				console.log(x.files[1]);
+
+
+			}
+
 			var over = function(evt){
 				console.log('sobre');
 				//evt.dataTransfer.setData('key',evt.target.id);
@@ -79,6 +135,9 @@
 				evt.dataTransfer.setData('key',evt.target.id);
 				
 			}
+
+			document.getElementById('arquivosImg').addEventListener('change',handleFileSelect, false);
+		
 
 		</script>
 
