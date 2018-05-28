@@ -92,7 +92,9 @@
 				}
 				
 				document.getElementById('listFiles')
-				listFiles.innerHTML = "<ul>" + output + "</ul>";
+				elementFinal = "<ul>" +  output.join('') + "</ul>";
+				console.log(elementFinal)
+				listFiles.innerHTML = elementFinal
 			}
 
 			

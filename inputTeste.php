@@ -12,7 +12,9 @@
                   f.size, ' bytes, last modified: ',
                   f.lastModifiedDate.toLocaleDateString(), '</li>');
     }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+    elementFinal = '<ul>' + output.join('') + '</ul>';
+    console.log(elementFinal)
+    document.getElementById('list').innerHTML = elementFinal
   }
 
   document.getElementById('files').addEventListener('change', handleFileSelect, false);

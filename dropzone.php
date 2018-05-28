@@ -1,17 +1,49 @@
+<style type="text/css">
+	
+	#dropZone{
+		width: 500px;
+		height: 300px;
+		border:2px solid #000;
+	}
+</style>
+
 <div id="dropZone">Drope files here</div>
 <output id="list"></output>
 
 
-<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
-	<input type="range" id="a" value="0" min="0" max="500">+
-	<input type="number" id="b" value="0">=
-<output name="x" for="a b"></output>
 
-</form>
 
 <script type="text/javascript">
 
-	myElement = document.getElementById("a");
-	//myNewElement = document.querySelectorAll(myElement);
-	//console.log(myNewElement)
+	function handleDragOver(evt){
+
+		console.log('estou sobre');
+		
+    	evt.preventDefault();
+		evt.dataTransfer.dropEffect = 'copy';
+
+	}
+
+	function handleDrop(evt){
+		
+		
+    	evt.preventDefault();
+
+    	var files = evt.dataTransfer.files;
+    	console.log(files);
+
+    	var output = [];
+    	for(var i=0, f;f= files[i];i++){
+    		output.push('<li><strong>'+ escape(f.name) + '</strong></li>')
+    	} 
+    	document.getElementById('list').innerHTML = '<ul>'+ output.join('') +'</ul>';
+
+
+	}
+
+
+	var dropZone = document.getElementById("dropZone")
+	dropZone.addEventListener('dragover', handleDragOver,false);
+	dropZone.addEventListener('drop', handleDrop,false);
+	
 </script>
