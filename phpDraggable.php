@@ -13,10 +13,10 @@
 			echo $images."<br>";
 		}
 		*/
-		$file = $_FILES['arquivos']['tmp_name'][0];
-		echo $file."<br>";
-		$src = imagecreatefromjpeg($file);
-		echo $src;
+		//$file = $_FILES['arquivos']['tmp_name'][0];
+		//echo $file."<br>";
+		//$src = imagecreatefromjpeg($file);
+		//echo $src;
 		
 
 	}
@@ -59,7 +59,7 @@
 		
 			<input type="file" name="arquivos[]" id='arquivosImg' multiple >
 			<button name="btn_enviar" type="submit">
-				Enviar
+				Enviarr
 			</button>
 			<div id="listFiles"></div>
 			
